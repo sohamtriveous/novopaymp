@@ -21,4 +21,9 @@
         android:layout_height="wrap_content"
         android:text="Pause" />
 
+    <SeekBar
+        android:id="@+id/activity_main_seekbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
 </LinearLayout>
