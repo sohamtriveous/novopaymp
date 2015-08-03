@@ -1,19 +1,45 @@
 package com.novopay.sohammusicplayer;
 
-import android.support.v7.app.ActionBarActivity;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import com.squareup.picasso.Picasso;
-
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity {
+    private Button mPlayButton;
+    private Button mPauseButton;
+
+    private MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+//        mediaPlayer = MediaPlayer.create(this, R.raw.a);
+
+        mPlayButton = (Button) findViewById(R.id.activity_main_play);
+        mPauseButton = (Button) findViewById(R.id.activity_main_pause);
+
+        mPlayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Play is clicked", Toast.LENGTH_SHORT).show();
+                mediaPlayer.start();
+            }
+        });
+
+        mPauseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Pause is clicked", Toast.LENGTH_SHORT).show();
+                mediaPlayer.pause();
+            }
+        });
     }
 
     @Override
