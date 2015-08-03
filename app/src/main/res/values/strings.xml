@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Soham Music Player</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_novopay">Hello Novopay, this is awesome</string>
+    <string name="click_me">Submit</string>
+</resources>
