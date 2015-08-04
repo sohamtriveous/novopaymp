@@ -7,6 +7,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 
+import hugo.weaving.DebugLog;
+
 /**
  * Created by sohammondal on 04/08/15.
  */
@@ -18,6 +20,7 @@ public class ListOfMusicActivity extends FragmentActivity {
     private MusicListFragmentStatePagerAdapter musicListFragmentStatePagerAdapter;
 
     @Override
+    @DebugLog
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viewpager);

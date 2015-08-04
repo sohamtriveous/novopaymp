@@ -13,40 +13,35 @@ import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import hugo.weaving.DebugLog;
+
 public class MainActivity extends ActionBarActivity {
     private static final String TAG = "MainActivity";
 
-    private Button mPlayButton;
-    private Button mPauseButton;
+    @Bind(R.id.activity_main_pause)
+    Button mPauseButton;
+    @Bind(R.id.activity_main_seekbar)
+    SeekBar seekBar;
 
     private MediaPlayer mediaPlayer;
-
-    private SeekBar seekBar;
-
     private MusicHandler musicHandler = new MusicHandler();
 
     @Override
+    @DebugLog
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ButterKnife.bind(this);
+
         mediaPlayer = MediaPlayer.create(this, R.raw.a);
 
-        mPlayButton = (Button) findViewById(R.id.activity_main_play);
-        mPauseButton = (Button) findViewById(R.id.activity_main_pause);
         seekBar = (SeekBar) findViewById(R.id.activity_main_seekbar);
 
         seekBar.setMax(mediaPlayer.getDuration());
-
-        mPlayButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Play is clicked", Toast.LENGTH_SHORT).show();
-                mediaPlayer.start();
-                musicHandler.sendEmptyMessage(MESSAGE_WAKE_UP_AND_SEEK);
-                Log.d("MainActivity", "Starting position/Total Duration is: " + mediaPlayer.getCurrentPosition() + ", " + mediaPlayer.getDuration());
-            }
-        });
 
         mPauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +70,14 @@ public class MainActivity extends ActionBarActivity {
 
             }
         });
+    }
+
+    @OnClick(R.id.activity_main_play)
+    public void onPlayButtonClick(View v) {
+        Toast.makeText(MainActivity.this, "Play is clicked", Toast.LENGTH_SHORT).show();
+        mediaPlayer.start();
+        musicHandler.sendEmptyMessage(MESSAGE_WAKE_UP_AND_SEEK);
+        Log.d("MainActivity", "Starting position/Total Duration is: " + mediaPlayer.getCurrentPosition() + ", " + mediaPlayer.getDuration());
     }
 
     @Override
