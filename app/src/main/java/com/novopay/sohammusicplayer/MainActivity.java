@@ -14,6 +14,8 @@ import android.widget.SeekBar;
 import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity {
+    private static final String TAG = "MainActivity";
+
     private Button mPlayButton;
     private Button mPauseButton;
 
@@ -76,6 +78,26 @@ public class MainActivity extends ActionBarActivity {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(TAG, "onStart");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause");
+    }
+
+
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -98,7 +120,6 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public static int MESSAGE_WAKE_UP_AND_SEEK = 10;
-    public static int MESSAGE_WAKE_UP_AND_STOP = 11;
 
     class MusicHandler extends Handler {
 
@@ -113,8 +134,6 @@ public class MainActivity extends ActionBarActivity {
                     }
                 }
             }
-
-            super.handleMessage(msg);
         }
     }
 
