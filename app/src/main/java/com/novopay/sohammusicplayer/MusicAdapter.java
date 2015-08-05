@@ -5,9 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.novopay.sohammusicplayer.models.Music;
+import com.squareup.picasso.Picasso;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
@@ -40,8 +42,8 @@ public class MusicAdapter extends BaseAdapter {
     }
 
     private class ViewHolder {
+        ImageView artistImageView;
         TextView albumTextView;
-        TextView artistTextView;
         TextView songTextView;
     }
 
@@ -57,7 +59,7 @@ public class MusicAdapter extends BaseAdapter {
             viewHolder = new ViewHolder();
 
             viewHolder.albumTextView = (TextView) view.findViewById(R.id.item_music_album);
-            viewHolder.artistTextView = (TextView) view.findViewById(R.id.item_music_artist);
+            viewHolder.artistImageView = (ImageView) view.findViewById(R.id.item_music_artist);
             viewHolder.songTextView = (TextView) view.findViewById(R.id.item_music_song);
 
             view.setTag(viewHolder);
@@ -70,7 +72,11 @@ public class MusicAdapter extends BaseAdapter {
         Music music = getItem(position);
 
         viewHolder.albumTextView.setText(music.getAlbumName());
-        viewHolder.artistTextView.setText(music.getArtistName());
+        Picasso
+                .with(contextWeakReference.get())
+                .load(music.getArtistImageUrl())
+                .error(R.drawable.ic_launcher)
+                .into(viewHolder.artistImageView);
         viewHolder.songTextView.setText(music.getSongName());
 
         return view;

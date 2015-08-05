@@ -6,13 +6,14 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 
 import hugo.weaving.DebugLog;
 
 /**
  * Created by sohammondal on 04/08/15.
  */
-public class ListOfMusicActivity extends FragmentActivity {
+public class ListOfMusicActivity extends AppCompatActivity {
     private ViewPager viewPager;
 
     private final int NUMBER_OF_PAGES = 2;
@@ -24,6 +25,9 @@ public class ListOfMusicActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viewpager);
+
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setIcon(R.drawable.ic_launcher);
 
         viewPager = (ViewPager) findViewById(R.id.activity_viewpager_viewpager);
 

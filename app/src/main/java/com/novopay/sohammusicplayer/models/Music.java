@@ -6,12 +6,12 @@ package com.novopay.sohammusicplayer.models;
 public class Music {
     private String songName;
     private String albumName;
-    private String artistName;
+    private String artistImageUrl;
 
-    public Music(String songName, String albumName, String artistName) {
+    public Music(String songName, String albumName, String artistImageUrl) {
         this.songName = songName;
         this.albumName = albumName;
-        this.artistName = artistName;
+        this.artistImageUrl = artistImageUrl;
     }
 
     public String getSongName() {
@@ -30,11 +30,11 @@ public class Music {
         this.albumName = albumName;
     }
 
-    public String getArtistName() {
-        return artistName;
+    public String getArtistImageUrl() {
+        return artistImageUrl;
     }
 
-    public void setArtistName(String artistName) {
-        this.artistName = artistName;
+    public void setArtistImageUrl(String artistImageUrl) {
+        this.artistImageUrl = artistImageUrl;
     }
 }

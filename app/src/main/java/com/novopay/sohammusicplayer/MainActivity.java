@@ -13,9 +13,12 @@ import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
+import com.novopay.sohammusicplayer.events.MusicCompletedEvent;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.greenrobot.event.EventBus;
 import hugo.weaving.DebugLog;
 
 public class MainActivity extends ActionBarActivity {
@@ -72,6 +75,7 @@ public class MainActivity extends ActionBarActivity {
         });
     }
 
+
     @OnClick(R.id.activity_main_play)
     public void onPlayButtonClick(View v) {
         Toast.makeText(MainActivity.this, "Play is clicked", Toast.LENGTH_SHORT).show();
@@ -83,8 +87,10 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        EventBus.getDefault().register(this);
         Log.d(TAG, "onStart");
     }
+
 
     @Override
     protected void onResume() {
@@ -94,10 +100,15 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onPause() {
+        EventBus.getDefault().unregister(this);
         super.onPause();
         Log.d(TAG, "onPause");
     }
 
+    public void onEvent(MusicCompletedEvent musicCompletedEvent) {
+        // update buttons
+        // update seekbar
+    }
 
 
     @Override
@@ -131,7 +142,7 @@ public class MainActivity extends ActionBarActivity {
             if (msg.what == MESSAGE_WAKE_UP_AND_SEEK) {
                 // update the seekbar
                 if (mediaPlayer != null) {
-                    if(mediaPlayer.isPlaying()) {
+                    if (mediaPlayer.isPlaying()) {
                         seekBar.setProgress(mediaPlayer.getCurrentPosition());
                         sendEmptyMessageDelayed(MESSAGE_WAKE_UP_AND_SEEK, 200);
                     }
