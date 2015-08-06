@@ -11,15 +11,23 @@
         android:layout_height="80dp"
         tools:src="@drawable/ic_launcher" />
 
-    <TextView
-        android:id="@+id/item_music_album"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="Hello world" />
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/item_music_song"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/item_music_album"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="album" />
+
+        <TextView
+            android:id="@+id/item_music_song"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="song"/>
+
+    </LinearLayout>
 
 </LinearLayout>

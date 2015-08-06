@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.novopay.sohammusicplayer.models.Collection1;
 import com.novopay.sohammusicplayer.models.Music;
 import com.squareup.picasso.Picasso;
 
@@ -19,9 +20,9 @@ import java.util.List;
  */
 public class MusicAdapter extends BaseAdapter {
     WeakReference<Context> contextWeakReference;
-    List<Music> musicList;
+    List<Collection1> musicList;
 
-    public MusicAdapter(Context context, List<Music> musicList) {
+    public MusicAdapter(Context context, List<Collection1> musicList) {
         this.contextWeakReference = new WeakReference<Context>(context);
         this.musicList = musicList;
     }
@@ -32,7 +33,7 @@ public class MusicAdapter extends BaseAdapter {
     }
 
     @Override
-    public Music getItem(int position) {
+    public Collection1 getItem(int position) {
         return musicList.get(position);
     }
 
@@ -69,15 +70,15 @@ public class MusicAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) view.getTag();
         }
 
-        Music music = getItem(position);
+        Collection1 collection1 = getItem(position);
 
-        viewHolder.albumTextView.setText(music.getAlbumName());
+        viewHolder.albumTextView.setText(collection1.getArtistname().getText());
         Picasso
                 .with(contextWeakReference.get())
-                .load(music.getArtistImageUrl())
+                .load(collection1.getArtistimage().getSrc())
                 .error(R.drawable.ic_launcher)
                 .into(viewHolder.artistImageView);
-        viewHolder.songTextView.setText(music.getSongName());
+        viewHolder.songTextView.setText(collection1.getSongname().getText());
 
         return view;
     }
