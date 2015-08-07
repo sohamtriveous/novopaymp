@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.novopay.sohammusicplayer.models.Collection1;
-import com.novopay.sohammusicplayer.models.Music;
 import com.squareup.picasso.Picasso;
 
 import java.lang.ref.WeakReference;

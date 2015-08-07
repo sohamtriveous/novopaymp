@@ -1,5 +1,6 @@
 package com.novopay.sohammusicplayer.provider;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -35,6 +36,18 @@ public class MusicSQLiteOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_TABLE_MUSIC);
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(TableMusic.ARTIST_IMAGE_URL, "https://www.apple.com/autopush/us/itunes/charts/songs/images/2015/7/a4b8104b-c210-b7e8-d89d-84a418638b83UMG_cvrart_00602547490759_01_RGB72_1800x1800_15UMGIM36513.jpg");
+        contentValues.put(TableMusic.ALBUM, "tempAlbum");
+        contentValues.put(TableMusic.SONG, "tempSong");
+        db.insert(Tables.MUSIC, null, contentValues);
+        db.insert(Tables.MUSIC, null, contentValues);
+        db.insert(Tables.MUSIC, null, contentValues);
+        db.insert(Tables.MUSIC, null, contentValues);
+        db.insert(Tables.MUSIC, null, contentValues);
+        db.insert(Tables.MUSIC, null, contentValues);
+        db.insert(Tables.MUSIC, null, contentValues);
+        db.insert(Tables.MUSIC, null, contentValues);
     }
 
     @Override

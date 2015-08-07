@@ -3,7 +3,9 @@ package com.novopay.sohammusicplayer.models;
 
 import com.google.gson.annotations.Expose;
 
-public class Collection1 {
+import java.io.Serializable;
+
+public class Collection1 implements Serializable {
 
     @Expose
     private Artistimage artistimage;

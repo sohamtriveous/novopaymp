@@ -1,5 +1,7 @@
 package com.novopay.sohammusicplayer;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,8 +11,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
+
 import com.novopay.sohammusicplayer.models.MusicApiResponse;
 import com.novopay.sohammusicplayer.network.MusicAPI;
+import com.novopay.sohammusicplayer.provider.MusicSQLiteOpenHelper;
 import com.novopay.sohammusicplayer.services.MusicService;
 
 import hugo.weaving.DebugLog;
@@ -43,21 +47,29 @@ public class FirstFragment extends Fragment {
             }
         });
 
-        MusicAPI.getApi().getMusicList(new Callback<MusicApiResponse>() {
-            @Override
-            @DebugLog
-            public void success(MusicApiResponse musicApiResponse, Response response) {
-                musicAdapter = new MusicAdapter(getActivity(), musicApiResponse.getResults().getCollection1());
-                listView.setAdapter(musicAdapter);
-                Toast.makeText(getActivity(), "Number of entries: "+musicApiResponse.getResults().getCollection1().size(), Toast.LENGTH_SHORT).show();
-            }
+        MusicSQLiteOpenHelper musicSQLiteOpenHelper = new MusicSQLiteOpenHelper(getActivity());
+        SQLiteDatabase sqLiteDatabase = musicSQLiteOpenHelper.getWritableDatabase();
 
-            @Override
-            @DebugLog
-            public void failure(RetrofitError error) {
-                Toast.makeText(getActivity(), "Some error "+error.getResponse().getReason(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        Cursor cursor = sqLiteDatabase.query(MusicSQLiteOpenHelper.Tables.MUSIC, null, null, null, null, null, null);
+
+        MusicCursorAdapter musicCursorAdapter = new MusicCursorAdapter(getActivity(), cursor);
+        listView.setAdapter(musicCursorAdapter);
+
+//        MusicAPI.getApi().getMusicList(new Callback<MusicApiResponse>() {
+//            @Override
+//            @DebugLog
+//            public void success(MusicApiResponse musicApiResponse, Response response) {
+//                musicAdapter = new MusicAdapter(getActivity(), musicApiResponse.getResults().getCollection1());
+//                listView.setAdapter(musicAdapter);
+//                Toast.makeText(getActivity(), "Number of entries: " + musicApiResponse.getResults().getCollection1().size(), Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            @DebugLog
+//            public void failure(RetrofitError error) {
+//                Toast.makeText(getActivity(), "Some error " + error.getResponse().getReason(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
 
         return view;
